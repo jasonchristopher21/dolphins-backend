@@ -1,0 +1,1 @@
+from app import app  # Import the Flask app instance created in app/__init__.py
