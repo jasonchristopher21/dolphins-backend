@@ -145,3 +145,7 @@ if not DEBUG:
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Read AWS credentials from .env file  
+AWS_ACCESS_KEY = env("AWS_ACCESS_KEY")
+AWS_SECRET_KEY = env("AWS_SECRET_KEY")
