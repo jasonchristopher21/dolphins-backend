@@ -1,0 +1,10 @@
+SECRET_KEY=django-insecure-4+zq$sxx2afy*mtdyneg3ynk^%q76q34fmp7=21=z+--8c0hrj
+AWS_ACCESS_KEY=#AKIAV7E2BENIGSZAFTU2
+AWS_SECRET_KEY=#tYS/50lLzq8fvFEQKsBPlzMghkyz0q5+v3GBAz5v
+DB_NAME=dolphins-backend-development
+DB_USER=postgres
+DB_PASSWORD=coklatkeju
+DB_HOST=localhost
+DB_PORT=5432
+OPENAI_API_KEY=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
+STOCK_KEY=K4UXKCTF5POS6YBS
