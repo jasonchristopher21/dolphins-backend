@@ -1,4 +1,5 @@
 import openai
+import json
 
 from dolphins_backend.settings import OPENAI_API_KEY
 
@@ -16,18 +17,19 @@ def get_completion(prompt, model="gpt-3.5-turbo-16k"):
     response = openai.ChatCompletion.create(
         model=model,
         messages=messages,
-        temperature=0.7,  # this is the degree of randomness of the model's output
+        temperature=0,  # this is the degree of randomness of the model's output
     )
     return response
 
 def parse_text_to_ML_format(text: str):
     prompt = """
-    Given the following text, generate a JSON data that contains the following keys.
+    Given the following text, generate a CSV-like table with the provided columns.
     All of which are provided in three backticks delimiters.
 
     Text: ```{text}```
 
-    Format: ```
+    Columns Required: ```
+    ID: ID of each client
     LIMIT_BAL: Amount of given credit in NT dollars (includes individual and family/supplementary credit
     SEX: Gender (1=male, 2=female)
     EDUCATION: (1=graduate school, 2=university, 3=high school, 4=others, 5=unknown, 6=unknown)
@@ -56,4 +58,11 @@ def parse_text_to_ML_format(text: str):
     """
     prompt = prompt.format(text=text)
     response = get_completion(prompt)
-    return response['choices'][0]['message']['content']
+    result = response['choices'][0]['message']['content']
+    print(result)
+    return result
+
+def string_to_json(text: str):
+    text = text.replace("`", "")
+    text = text.replace("json", "")
+    return json.loads(text)

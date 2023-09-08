@@ -151,3 +151,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Read AWS credentials from .env file  
 AWS_ACCESS_KEY = env("AWS_ACCESS_KEY")
 AWS_SECRET_KEY = env("AWS_SECRET_KEY")
+
+# Read OPENAI API KEY
+OPENAI_API_KEY = env("OPENAI_API_KEY")
