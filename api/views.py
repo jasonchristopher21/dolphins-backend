@@ -18,13 +18,19 @@ from api.serializers import (
 )
 
 
+from api.logic.parsing_logic import read_files
+from api.logic.openai_logic import parse_text_to_ML_format
+from api.logic.ml_logic import predict
+
 class ProcessFilesView(APIView):
 
     def post(self, request, *args, **kwargs):
-        serializer_data = S3FileSerializer(data=request.data)
-        serializer_data.is_valid(raise_exception=True)
-        serializer_data.save()
-        return Response(serializer_data.data, status=status.HTTP_201_CREATED)
+        parsed_data = read_files(request.data['files'])
+        predictions = predict(None)
+        # serializer_data = S3FileSerializer(data=request.data)
+        # serializer_data.is_valid(raise_exception=True)
+        # serializer_data.save()
+        return Response(predictions, status=status.HTTP_201_CREATED)
 
 
 class RetrieveResultsView(generics.ListAPIView):
