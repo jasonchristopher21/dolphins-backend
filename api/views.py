@@ -1,6 +1,8 @@
 from django.http import HttpResponseBadRequest
 from django.db.models import F
 
+from api.serializers import ResultsSerializer
+
 from rest_framework import generics, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -27,15 +29,9 @@ class ProcessFilesView(APIView):
     def post(self, request, *args, **kwargs):
         parsed_data = read_files(request.data['files'])
         predictions = predict(None)
-        # serializer_data = S3FileSerializer(data=request.data)
-        # serializer_data.is_valid(raise_exception=True)
-        # serializer_data.save()
         return Response(predictions, status=status.HTTP_201_CREATED)
 
-
 class RetrieveResultsView(generics.ListAPIView):
-
-    def get_queryset(self):
-        qs = Results.objects.annotate(client_name=F('client__name')).values(
-            'client_id', 'client_name', 'result')
-        return qs
+    
+    queryset = Results.objects.all()
+    serializer_class = ResultsSerializer

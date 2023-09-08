@@ -84,7 +84,9 @@ def extract_text_from_csv(file_path: str):
         csvreader = csv.reader(csvfile)
         header = next(csvreader)
         resulting_text.append(",".join(header))
+        
         for row in csvreader:
             resulting_text.append(",".join(row))
+            
     result = "\n".join(resulting_text)
     return result
